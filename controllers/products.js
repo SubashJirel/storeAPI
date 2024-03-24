@@ -1,7 +1,9 @@
-require('express-async-errors');
+const Product = require('../models/product');
+// require('express-async-errors');
+
 const getAllProductsStatic = async (req, res) => {
-  throw new Error('Testing express async error handlers');
-  res.status(200).json({ msg: `Products testing route` });
+  const products = await Product.find({ featured: true });
+  res.status(200).json({ products, nbHits: products.length });
 };
 const getAllProducts = async (req, res) => {
   res.status(200).json({ msg: `Products route` });
